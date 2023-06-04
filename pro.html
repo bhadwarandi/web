@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promise Examples</title>
+  <script>
+    function sumOfNumbers(numbers) {
+      return new Promise((resolve, reject) => {
+        if (!Array.isArray(numbers)) {
+          reject(new Error("Invalid input. Expected an array."));
+        }
+
+        const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+        resolve(sum);
+      });
+    }
+
+    function averageOfNumbers(numbers) {
+      return new Promise((resolve, reject) => {
+        if (!Array.isArray(numbers)) {
+          reject(new Error("Invalid input. Expected an array."));
+        }
+
+        const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+        const average = sum / numbers.length;
+        resolve(average);
+      });
+    }
+
+    function sumOfEvenNumbers(numbers) {
+      return new Promise((resolve, reject) => {
+        if (!Array.isArray(numbers)) {
+          reject(new Error("Invalid input. Expected an array."));
+        }
+
+        const sum = numbers.reduce((acc, curr) => {
+          if (curr % 2 === 0) {
+            return acc + curr;
+          } else {
+            return acc;
+          }
+        }, 0);
+        resolve(sum);
+      });
+    }
+
+    function countCharacters(string) {
+      return new Promise((resolve, reject) => {
+        if (typeof string !== "string") {
+          reject(new Error("Invalid input. Expected a string."));
+        }
+
+        const count = string.length;
+        resolve(count);
+      });
+    }
+
+    function countVowels(string) {
+      return new Promise((resolve, reject) => {
+        if (typeof string !== "string") {
+          reject(new Error("Invalid input. Expected a string."));
+        }
+
+        const vowels = string.match(/[aeiou]/gi);
+        const count = vowels ? vowels.length : 0;
+        resolve(count);
+      });
+    }
+
+    // Example usage
+    function performOperations() {
+      const numbersInput = document.getElementById("numbersInput").value;
+      const stringInput = document.getElementById("stringInput").value;
+
+      const numbers = numbersInput.split(",").map(Number);
+      const string = stringInput;
+
+      sumOfNumbers(numbers)
+        .then(sum => {
+          document.getElementById("resultSum").textContent = "Sum of numbers: " + sum;
+          return averageOfNumbers(numbers);
+        })
+        .then(average => {
+          document.getElementById("resultAverage").textContent = "Average of numbers: " + average;
+          return sumOfEvenNumbers(numbers);
+        })
+        .then(sumEven => {
+          document.getElementById("resultSumEven").textContent = "Sum of even numbers: " + sumEven;
+          return countCharacters(string);
+        })
+        .then(count => {
+          document.getElementById("resultCountCharacters").textContent = "Count of characters in the string: " + count;
+          return countVowels(string);
+        })
+        .then(countVowels => {
+          document.getElementById("resultCountVowels").textContent = "Count of vowels in the string: " + countVowels;
+        })
+        .catch(error => {
+          document.getElementById("errorMessage").textContent = "Error: " + error.message;
+        });
+    }
+  </script>
+</head>
+<body>
+  <h1>Promise Examples</h1>
+  <label for="numbersInput">Enter numbers (comma-separated):</label>
+  <input type="text" id="numbersInput"><br>
+  <label for="stringInput">Enter a string:</label>
+  <input type="text" id="stringInput"><br>
+  <button onclick="performOperations()">Perform Operations</button>
+  
+  <h2>Results:</h2>
+  <div id="resultSum"></div>
+  <div id="resultAverage"></div>
+  <div id="resultSumEven"></div>
+  <div id="resultCountCharacters"></div>
+  <div id="resultCountVowels"></div>
+  <div id="errorMessage"></div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Async Function with Await</title>
+  <script>
+    async function asyncFunction() {
+      alert("Async Function started");
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      alert("Async Function after 2 seconds");
+      const x=7,y=9;
+      var z=x+y;
+      alert(z);
+
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      alert("Async Function after another 3 seconds");
+
+      alert("Async Function completed");
+    }
+
+    function runAsyncFunction() {
+      asyncFunction()
+        .catch(error => {
+          alert("Error occurred: " + error);
+        });
+    }
+  </script>
+</head>
+<body>
+  <h1>Async Function with Await</h1>
+  <button onclick="runAsyncFunction()">Run Async Function</button>
+</body>
+</html>

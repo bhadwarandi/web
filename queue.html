@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Queue Implementation</title>
+  <style>
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Queue Implementation</h2>
+    <input type="text" id="elementInput" placeholder="Enter an element">
+    <button onclick="enqueueElement()">Enqueue</button>
+    <button onclick="dequeueElement()">Dequeue</button>
+    <button onclick="peekElement()">Peek</button>
+    <button onclick="printQueue()">Print Queue</button>
+    <br><br>
+    <div id="queueContainer"></div>
+  </div>
+
+  <script>
+    class Queue {
+      constructor() {
+        this.items = [];
+      }
+
+      enqueue(element) {
+        this.items.push(element);
+      }
+
+      dequeue() {
+        if (this.isEmpty()) {
+          return "Underflow";
+        }
+        return this.items.shift();
+      }
+
+      peek() {
+        if (this.isEmpty()) {
+          return "No elements in the queue";
+        }
+        return this.items[0];
+      }
+
+      isEmpty() {
+        return this.items.length === 0;
+      }
+
+      printQueue() {
+        let queueContainer = document.getElementById("queueContainer");
+        queueContainer.innerText = this.items.join(" ");
+      }
+    }
+
+    const queue = new Queue();
+
+    function enqueueElement() {
+      let elementInput = document.getElementById("elementInput");
+      let element = elementInput.value;
+      queue.enqueue(element);
+      elementInput.value = "";
+      queue.printQueue();
+    }
+
+    function dequeueElement() {
+      let dequeuedElement = queue.dequeue();
+      alert("Dequeued element: " + dequeuedElement);
+      queue.printQueue();
+    }
+
+    function peekElement() {
+      let frontElement = queue.peek();
+      alert("Front element: " + frontElement);
+    }
+
+    function printQueue() {
+      queue.printQueue();
+    }
+  </script>
+</body>
+</html>

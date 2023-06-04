@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linked List Implementation</title>
+  <script>
+    // Node class
+    class Node {
+      constructor(value) {
+        this.value = value;
+        this.next = null;
+      }
+    }
+
+    // Linked list class
+    class LinkedList {
+      constructor() {
+        this.head = null;
+      }
+
+      // Add a node to the end of the linked list
+      add(value) {
+        const newNode = new Node(value);
+
+        if (!this.head)
+         {
+          this.head = newNode;
+        }
+         else 
+        {
+          let current = this.head;
+          while (current.next)
+           {
+            current = current.next;
+          }
+          current.next = newNode;
+        }
+      }
+
+      // Remove a node from the linked list
+      remove(value)
+       {
+        if (!this.head)
+         {
+          return;
+        }
+
+        if (this.head.value === value)
+         {
+          this.head = this.head.next;
+        } 
+        else 
+        {
+          let current = this.head;
+          let previous = null;
+
+          while (current && current.value !== value)
+           {
+            previous = current;
+            current = current.next;
+          }
+
+          if (current)
+           {
+            previous.next = current.next;
+          }
+        }
+      }
+
+      // Display the linked list
+      display() {
+        let current = this.head;
+        let values = [];
+
+        while (current) {
+          values.push(current.value);
+          current = current.next;
+        }
+
+        console.log("Linked List: " + values.join(" -> "));
+      }
+    }
+
+    // Example usage
+    var linkedList = new LinkedList();
+
+    function addNode() {
+      var value = document.getElementById("addInput").value;
+      linkedList.add(value);
+      linkedList.display();
+    }
+
+    function removeNode() {
+      var value = document.getElementById("removeInput").value;
+      linkedList.remove(value);
+      linkedList.display();
+    }
+  </script>
+</head>
+<body>
+  <h1>Linked List Implementation</h1>
+
+  <h2>Add Node</h2>
+  <input type="text" id="addInput" placeholder="Enter value">
+  <button onclick="addNode()">Add</button>
+
+  <h2>Remove Node</h2>
+  <input type="text" id="removeInput" placeholder="Enter value">
+  <button onclick="removeNode()">Remove</button>
+
+  <script>
+    console.log = function(message) {
+      var output = document.createElement("div");
+      output.textContent = message;
+      document.body.appendChild(output);
+    }
+  </script>
+</body>
+</html>

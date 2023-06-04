@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stack Implementation</title>
+ <!-- <style>
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>-->
+</head>
+<body>
+  <div class="container">
+  <!--  <h2>Stack Implementation</h2>-->
+    <input type="text" id="elementInput" placeholder="Enter an element">
+    <button onclick="pushElement()">Push</button>
+    <button onclick="popElement()">Pop</button>
+    <button onclick="peekElement()">Peek</button>
+    <button onclick="printStack()">Print Stack</button>
+    <br><br>
+    <div id="stackContainer"></div>
+  </div>
+
+  <script>
+    class Stack {
+      constructor() {
+        this.items = [];
+      }
+
+      push(element) {
+        this.items.push(element);
+      }
+
+      pop() {
+        if (this.isEmpty()) {
+          return "Underflow";
+        }
+        return this.items.pop();
+      }
+
+      peek() {
+        if (this.isEmpty()) {
+          return "No elements in the stack";
+        }
+        return this.items[this.items.length - 1];
+      }
+
+      isEmpty() {
+        return this.items.length === 0;
+      }
+
+      printStack() {
+        let stackContainer = document.getElementById("stackContainer");
+        stackContainer.innerText = this.items.join(" ");
+      }
+    }
+
+    const stack = new Stack();
+
+    function pushElement() {
+      let elementInput = document.getElementById("elementInput");
+      let element = elementInput.value;
+      stack.push(element);
+      elementInput.value = "";
+      stack.printStack();
+    }
+
+    function popElement() {
+      let poppedElement = stack.pop();
+      alert("Popped element: " + poppedElement);
+      stack.printStack();
+    }
+
+    function peekElement() {
+      let topElement = stack.peek();
+      alert("Top element: " + topElement);
+    }
+
+    function printStack() {
+      stack.printStack();
+    }
+  </script>
+</body>
+</html>
